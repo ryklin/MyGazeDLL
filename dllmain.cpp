@@ -260,9 +260,9 @@ extern "C" __declspec(dllexport) string getInfo_SDK()
     return "?";
 }
 
-extern "C" __declspec(dllexport) string getInfo_DLL()
+extern "C" __declspec(dllexport) char* getVersion_DLL()
 {
-    return "2.1.0";
+	return "0.0.3";
 }
 
 extern "C" __declspec(dllexport) bool allow_saving_data()
@@ -280,11 +280,11 @@ extern "C" __declspec(dllexport) int destroy()
 	return 0;
 }
 
-extern "C" __declspec(dllexport) int instantiate()
+extern "C" __declspec(dllexport) int instantiate(HWND hWnd)
 {
 	destroy();
 
-	myGazeDLL = new MyGazeClass();
+	myGazeDLL = new MyGazeClass(hWnd);
 
 	if (myGazeDLL->isConnected()) {
 		return 1;

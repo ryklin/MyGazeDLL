@@ -12,8 +12,11 @@
 #include <windows.h>
 // TODO: reference additional headers your program requires here
 #include <string>
+#include <iostream>
 
 using namespace std;
+
+#define TIMER_ID 101
 
 struct F_POINT
 {

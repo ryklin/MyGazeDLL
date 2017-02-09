@@ -9,7 +9,7 @@ class MyGazeClass
 {
 public:
 
-	MyGazeClass();
+	MyGazeClass(HWND hWnd);
 	~MyGazeClass();
 	int isConnected(){ return connected; }
     int loadCalibration(char* filePath);
@@ -30,6 +30,10 @@ private:
 	int connected;
 	static data_sample sample;
 	string sdk_info;
+	string product_id;
+
+	HWND hWnd;
+
 };
 
 #endif // _MYGAZE_DLL_H_

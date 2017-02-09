@@ -4,12 +4,12 @@
 #include "MyGaze.h"
 data_sample MyGazeClass::sample;
 
-string product_id;
-
-MyGazeClass::MyGazeClass(){
+MyGazeClass::MyGazeClass(HWND hWnd){
 	// This function gets called when hairball loads the eye tracker. This is where you want to connect to the eye tracker with its SDK function calls. This is also where initialization of variables takes place.
 
 	connected = FALSE;
+	this->hWnd = hWnd;
+
 	sample.gaze_lx_relative = 0.5;
 	sample.gaze_ly_relative = 0.5;
 	sample.gaze_rx_relative = 0.5;
@@ -32,7 +32,7 @@ MyGazeClass::MyGazeClass(){
 	connected = TRUE;
 
 	// this timer code is just for example to simulate an eye tracker
-	SetTimer(NULL, 0, 20, (TIMERPROC)&on_gaze_data_received);
+	SetTimer(hWnd, TIMER_ID, 20, (TIMERPROC)&on_gaze_data_received);
 }
 
 MyGazeClass::~MyGazeClass(){
@@ -40,8 +40,8 @@ MyGazeClass::~MyGazeClass(){
 	// you may need to call some disconnect functions here depending on the DLL. This function will get called when the user disconnects from the eye tracker in Hairball. This happens when the program exists OR when a different DLL is loaded, and this one gets unloaded
 	connected = FALSE;
 
-	// this timer code is just for example to simulate an eye tracker
-	KillTimer(0, 1);
+	// this timer code is just an example to simulate an eye tracker
+	KillTimer(hWnd, TIMER_ID);
 }
 
 // This is the function where new data is sampled and returned to Hairball. I have implemented some random values here so that you can changes in Hairball
